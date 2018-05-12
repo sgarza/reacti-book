@@ -1,15 +1,47 @@
-import React from "react";
+import React, { Component } from "react";
 import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { isLoaded } from "react-redux-firebase";
 
-const Home = props => (
-  <div>
-    <h1>Home</h1>
-    <p>Welcome home!</p>
-    <button onClick={() => props.changePage()}>About me</button>
-  </div>
-);
+class Home extends Component {
+  get isAuthenticated() {
+    const { auth } = this.props;
+
+    if (isLoaded(auth)) {
+      if (auth.uid) {
+        return true;
+      }
+
+      return false;
+    }
+  }
+
+  renderBody() {
+    if (this.isAuthenticated) {
+      return <div>Wall</div>;
+    }
+
+    return (
+      <div>
+        <h1>Home</h1>
+        <p>Welcome home!</p>
+        <button onClick={() => this.props.changePage()}>About me</button>
+      </div>
+    );
+  }
+
+  render() {
+    return <div>{this.renderBody()}</div>;
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
+  };
+};
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -19,4 +51,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
