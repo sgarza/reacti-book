@@ -15,7 +15,7 @@ const ALLOWED_CONFIG = [
   "maxLength",
   "insideHint",
   "tabindex",
-  // "onChange",
+  "onChange",
   "checked",
   "value",
   "options"

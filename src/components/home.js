@@ -3,6 +3,7 @@ import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
+import PostBox from "../containers/post-box.container";
 
 class Home extends Component {
   get isAuthenticated() {
@@ -19,7 +20,7 @@ class Home extends Component {
 
   renderBody() {
     if (this.isAuthenticated) {
-      return <div>Wall</div>;
+      return <PostBox />;
     }
 
     return (
