@@ -6,7 +6,9 @@ import "../styles/post-box.css";
 
 class PostBoxForm extends Component {
   onSubmit(data) {
-    return this.props.onPublish(data);
+    return this.props.onPublish(data).then(() => {
+      this.props.reset();
+    });
   }
 
   render() {
