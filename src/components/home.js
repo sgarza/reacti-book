@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 import PostBox from "../containers/post-box.container";
@@ -37,8 +38,10 @@ class Home extends Component {
     return (
       <div className="home">
         <h1>Home</h1>
-        <p>Welcome home!</p>
-        <button onClick={() => this.props.changePage()}>About me</button>
+        <p>
+          Welcome to ReactiBook, <Link to="/signup">create an account</Link> or{" "}
+          <Link to="/signup">signin</Link> to continue.
+        </p>
       </div>
     );
   }

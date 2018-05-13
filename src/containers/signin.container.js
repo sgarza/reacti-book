@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import SigninForm from "../components/signin-form";
-import { signin } from "../actions";
+import { firebaseConnect } from "react-redux-firebase";
 
 class SignIn extends Component {
   constructor(props) {
@@ -18,7 +17,8 @@ class SignIn extends Component {
   componentWillMount() {}
 
   onSignin(data) {
-    return this.props.signin(data).then(() => {
+    const { firebase } = this.props;
+    return firebase.login(data).then(() => {
       this.setState({
         redirectTo: "/"
       });
@@ -56,15 +56,4 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    auth: state.firebase,
-    profile: state.firebase.profile
-  };
-};
-
-const actions = {
-  signin
-};
-
-export default connect(mapStateToProps, actions)(SignIn);
+export default firebaseConnect()(SignIn);

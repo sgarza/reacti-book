@@ -6116,9 +6116,9 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
-react-redux-firebase@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-2.1.1.tgz#bbbb2d3b69707d6ba3dbb6c89df1ff87af8545dc"
+react-redux-firebase@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-2.1.0.tgz#ec7da1fc1a56a13a1db77fdaf1471bf74c4ef02a"
   dependencies:
     hoist-non-react-statics "^2.3.1"
     lodash "^4.17.4"

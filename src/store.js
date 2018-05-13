@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { routerMiddleware } from "react-router-redux";
 import thunk from "redux-thunk";
-import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
+import { reactReduxFirebase } from "react-redux-firebase";
 import firebase from "firebase";
 import createHistory from "history/createBrowserHistory";
 import rootReducer from "./reducers";
@@ -9,7 +9,8 @@ import firebaseConfig from "./config/firebase";
 
 // react-redux-firebase config
 const rrfConfig = {
-  userProfile: "users"
+  userProfile: "users",
+  updateProfileOnLogin: false
 };
 
 // Initialize firebase instance
@@ -24,10 +25,7 @@ export const history = createHistory();
 
 const initialState = {};
 const enhancers = [];
-const middleware = [
-  thunk.withExtraArgument(getFirebase),
-  routerMiddleware(history)
-];
+const middleware = [thunk, routerMiddleware(history)];
 
 if (process.env.NODE_ENV === "development") {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;

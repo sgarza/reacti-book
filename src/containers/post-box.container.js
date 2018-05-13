@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { compose } from "redux";
-import { firebaseConnect, populate } from "react-redux-firebase";
+import { firebaseConnect } from "react-redux-firebase";
 import PostBoxForm from "../components/post-box-form";
-
-const populates = [{ child: "owner", root: "users" }];
 
 class PostBox extends Component {
   constructor(props) {
@@ -15,19 +12,11 @@ class PostBox extends Component {
   onPublish(data) {
     const { firebase } = this.props;
 
-    return firebase.push("posts", data);
+    return firebase.push(`posts`, data);
   }
 
   render() {
     return <PostBoxForm onPublish={this.onPublish} />;
   }
 }
-
-const enhance = compose(
-  firebaseConnect([{ path: "posts", populates }]),
-  connect(({ firebase }) => ({
-    posts: populate(firebase, "posts", populates)
-  }))
-);
-
-export default enhance(PostBox);
+export default firebaseConnect()(connect()(PostBox));

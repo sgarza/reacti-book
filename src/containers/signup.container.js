@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import SignupForm from "../components/signup-form";
-import { signup } from "../actions";
+import { firebaseConnect } from "react-redux-firebase";
 
 class SignUp extends Component {
   constructor(props) {
@@ -15,14 +14,15 @@ class SignUp extends Component {
     };
   }
 
-  componentWillMount() {}
-
   onSignup(data) {
-    return this.props.signup(data).then(() => {
-      this.setState({
-        redirectTo: "/"
+    const { firebase } = this.props;
+    return firebase
+      .createUser(data, { email: data.email, username: data.username })
+      .then(() => {
+        this.setState({
+          redirectTo: "/"
+        });
       });
-    });
   }
 
   redirect() {
@@ -55,15 +55,4 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    auth: state.firebase,
-    profile: state.firebase.profile
-  };
-};
-
-const actions = {
-  signup
-};
-
-export default connect(mapStateToProps, actions)(SignUp);
+export default firebaseConnect()(SignUp);

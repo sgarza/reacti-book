@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import Post from "./post.container";
 import "../styles/post-list.css";
 
-const populates = [{ child: "owner", root: "users" }];
-
 const PUBLIC_AUDIENCE = "public";
 const FRIENDS_AUDIENCE = "friends";
 
@@ -16,7 +14,8 @@ class PostList extends Component {
     super(props);
 
     this.state = {
-      filter: null
+      filter: null,
+      currentUser: null
     };
   }
 
@@ -36,7 +35,7 @@ class PostList extends Component {
     const { posts } = this.props;
     const { filter } = this.state;
 
-    return Object.keys(posts)
+    return Object.keys(posts || [])
       .reverse()
       .map(id => {
         return {
@@ -94,10 +93,12 @@ class PostList extends Component {
 }
 
 const enhance = compose(
-  firebaseConnect([{ path: "posts", populates }]),
-  connect(({ firebase }) => ({
-    posts: populate(firebase, "posts", populates)
-  }))
+  firebaseConnect(["posts"]),
+  connect(({ firebase }) => {
+    return {
+      posts: populate(firebase, `posts`)
+    };
+  })
 );
 
 export default enhance(PostList);

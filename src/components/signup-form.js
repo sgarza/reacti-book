@@ -34,6 +34,12 @@ class SignupForm extends Component {
         {this.renderError()}
         <form onSubmit={handleSubmit(props => this.onSubmit(props))}>
           <Field
+            name="username"
+            type="username"
+            component={FormField}
+            label="Username"
+          />
+          <Field
             name="email"
             type="email"
             component={FormField}
