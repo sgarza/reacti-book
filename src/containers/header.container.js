@@ -28,7 +28,7 @@ class Header extends Component {
   renderWelcome() {
     if (this.isAuthenticated) {
       const { auth } = this.props;
-      return <span>Welcome {auth.email}</span>;
+      return <div className="welcome">Welcome {auth.email}</div>;
     }
 
     return null;

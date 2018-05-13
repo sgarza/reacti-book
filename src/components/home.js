@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 import PostBox from "../containers/post-box.container";
+import PostList from "../containers/post-list.container";
 
 class Home extends Component {
   get isAuthenticated() {
@@ -20,11 +21,21 @@ class Home extends Component {
 
   renderBody() {
     if (this.isAuthenticated) {
-      return <PostBox />;
+      return (
+        <div className="home authenticated">
+          <div className="row">
+            <div className="col-3" />
+            <div className="col-9">
+              <PostBox />
+              <PostList />
+            </div>
+          </div>
+        </div>
+      );
     }
 
     return (
-      <div>
+      <div className="home">
         <h1>Home</h1>
         <p>Welcome home!</p>
         <button onClick={() => this.props.changePage()}>About me</button>

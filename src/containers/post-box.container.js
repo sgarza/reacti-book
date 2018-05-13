@@ -26,7 +26,7 @@ class PostBox extends Component {
 const enhance = compose(
   firebaseConnect([{ path: "posts", populates }]),
   connect(({ firebase }) => ({
-    todos: populate(firebase, "posts", populates)
+    posts: populate(firebase, "posts", populates)
   }))
 );
 
